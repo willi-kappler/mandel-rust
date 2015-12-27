@@ -1,0 +1,11 @@
+[package]
+name = "mandel"
+version = "0.4.0"
+authors = ["Willi Kappler"]
+
+[dependencies]
+time = "0.1"
+num = "0.1"
+clap = "1"
+scoped_threadpool = "0.1"
+simple_parallel = "0.3.0"
