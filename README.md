@@ -3,17 +3,15 @@
 This code shows how to calculate the set in serial and parallel.
 More parallel versions will be added in the future.
 
-Written by Willi Kappler
-
-License: MIT
+Written by Willi Kappler, License: MIT
 
 Compile with:
 
-  cargo build --release
+    cargo build --release
 
 Run with the default values:
 
-  cargo run --release
+    cargo run --release
   
 Supported command line options:
 
