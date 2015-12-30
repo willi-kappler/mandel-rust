@@ -3,7 +3,7 @@
 This code shows how to calculate the set in serial and parallel.
 More parallel versions will be added in the future.
 
-Written by Willi Kappler, License: MIT
+Written by Willi Kappler, License: MIT - Version 0.1 (2015.12.28)
 
 Compile with:
 
