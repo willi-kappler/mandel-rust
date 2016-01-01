@@ -12,7 +12,7 @@ Compile with:
 Run with the default values:
 
     cargo run --release
-  
+
 Supported command line options:
 
         --img_size <IMAGE_SIZE>              size of image in pixel (square, default: 1024)
@@ -26,4 +26,10 @@ Supported command line options:
 The main program runs the calculation three times: 1 x single threaded and currently 2 x multi threaded.
 It writes the mandelbrot set out as PPN image files.
 
-Feedback is welcome
+# TODO:
+- Check rayon
+- Check ArrayFire
+- Use rust-fmt on source code
+- Check docopt (instead of clap ?)
+
+Any feedback is welcome!
