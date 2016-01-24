@@ -27,7 +27,7 @@ Supported command line options:
         --re2 <REAL2>                        right real part (default: 1.0)
 
 The main program runs the calculation 4 times: 1 x single threaded and currently 3 x multi threaded.
-It writes the mandelbrot set out as PPN image files.
+It writes the mandelbrot set out as PPN image files. For each method one image file is created.
 
 # Used crates:
 - Clap: command line parsing
@@ -44,6 +44,10 @@ Measured on a Transtec server with the following specs:
 - Operating system: 64 bit Ubuntu Server 14.04
 - Rust version: rustc 1.5.0 (3d7cd77e4 2015-12-04)
 - Mandel configuration: re1: -2.00, re2: 1.00, img1: -1.50, img2: 1.50, max_iter: 2048, img_size: 1024
+
+
+![mandelbrot benchmark plot](plot/mandel_bench.png)
+
 
 Method | Number of threads | Time taken (in ms)
 -------|-------------------|------------------------
@@ -76,13 +80,13 @@ simple parallel | 14 | 252.61965
 simple parallel | 16 | 216.03580
 simple parallel | 20 | 186.54049
 simple parallel | 24 | 161.75248
-rayon* | 24? | 139.04431
+rayon* | 24 | 139.04431
 
 (*) Note that rayon uses whatever number of cores are available at the moment.
 
 # TODO:
-- [] Check ArrayFire
-- [] Use rust-fmt on source code
-- [] Check docopt (instead of clap ?)
+- [ ] Check ArrayFire
+- [ ] Use rust-fmt on source code
+- [ ] Check docopt (instead of clap ?)
 
 Any feedback is welcome!
