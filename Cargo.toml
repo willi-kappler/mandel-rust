@@ -1,6 +1,6 @@
 [package]
 name = "mandel"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Willi Kappler"]
 
 [dependencies]
@@ -10,4 +10,3 @@ clap = "1"
 scoped_threadpool = "0.1"
 simple_parallel = "0.3.0"
 rayon = "0.0.1"
-

@@ -54,7 +54,7 @@ fn parse_arguments() -> MandelConfig {
              --img1=[IMAGINARY1] 'lower part (default: -1.50)'
              --img2=[IMAGINARY2] 'upper part (default: 1.50)'
              --max_iter=[MAX_ITER] 'maximum number of iterations (default: 2048)'
-             --img_size=[IMAGE_SIZE] 'size of image in pixel (square, default: 1024)'
+             --img_size=[IMAGE_SIZE] 'size of image in pixel (square, default: 1024, must be a power of two)'
              --num_threads=[NUMBER_OF_THREADS] 'number of threads to use (default: 2)'")
         .get_matches();
 
