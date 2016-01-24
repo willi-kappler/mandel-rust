@@ -26,7 +26,7 @@ Supported command line options:
         --re1 <REAL1>                        left real part (default: -2.0)
         --re2 <REAL2>                        right real part (default: 1.0)
 
-The main program runs the calculation three times: 1 x single threaded and currently 3 x multi threaded.
+The main program runs the calculation 4 times: 1 x single threaded and currently 3 x multi threaded.
 It writes the mandelbrot set out as PPN image files.
 
 # Used crates:
