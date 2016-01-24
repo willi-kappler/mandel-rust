@@ -37,7 +37,7 @@ It writes the mandelbrot set out as PPN image files. For each method one image f
 - Simple_parallel: using parallel for loop
 - Rayon: using recursive fork-join (divide-and-conquer) call
 
-# Timging
+# Benchmark
 Measured on a Transtec server with the following specs:
 - RAM: 32 GB
 - CPU: 2 x Intel Xeon(R) CPU E5-2620 v3 @ 2.40GHz (12 Cores, with hyper threading 24 cores)
@@ -70,7 +70,7 @@ Using all cores (including virtual one due to hyper threading) rayon is the fast
 
 # TODO:
 - [ ] Check ArrayFire
-- [ ] Use rust-fmt on source code
-- [ ] Check docopt (instead of clap ?)
+- [ ] Use rust-fmt on source code (Thanks to matklad)
+- [ ] Check docopt (instead of clap ? Thanks to matklad)
 
 Any feedback is welcome!
