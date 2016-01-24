@@ -39,6 +39,7 @@ struct MandelConfig {
     y_step: f64,
     max_iter: u32,
     img_size: u32,
+    write_meta_data: bool,
     num_threads: u32
 }
 
@@ -53,6 +54,7 @@ fn parse_arguments() -> MandelConfig {
              --re2=[REAL2] 'right real part (default: 1.0)'
              --img1=[IMAGINARY1] 'lower part (default: -1.50)'
              --img2=[IMAGINARY2] 'upper part (default: 1.50)'
+             --write_meta_data 'write meta data like run time into the ppm file (default: off)'
              --max_iter=[MAX_ITER] 'maximum number of iterations (default: 2048)'
              --img_size=[IMAGE_SIZE] 'size of image in pixel (square, default: 1024, must be a power of two)'
              --num_threads=[NUMBER_OF_THREADS] 'number of threads to use (default: 2)'")
@@ -62,6 +64,7 @@ fn parse_arguments() -> MandelConfig {
     let re2 = value_t!(matches.value_of("REAL2"), f64).unwrap_or(1.0);
     let img1 = value_t!(matches.value_of("IMAGINARY1"), f64).unwrap_or(-1.5);
     let img2 = value_t!(matches.value_of("IMAGINARY2"), f64).unwrap_or(1.5);
+    let meta_data = matches.is_present("write_meta_data");
     let max_iter = value_t!(matches.value_of("MAX_ITER"), u32).unwrap_or(2048);
     let img_size = value_t!(matches.value_of("IMAGE_SIZE"), u32).unwrap_or(1024);
     let num_threads = value_t!(matches.value_of("NUMBER_OF_THREADS"), u32).unwrap_or(2);
@@ -87,6 +90,7 @@ fn parse_arguments() -> MandelConfig {
         y_step: y_step,
         max_iter: max_iter,
         img_size: img_size,
+        write_meta_data: meta_data,
         num_threads: num_threads
     }
 }
@@ -113,7 +117,10 @@ fn write_image(file_name: &str, mandel_config: &MandelConfig, time_in_ms: f64, i
 
     try!(buffer.write(b"P3\n"));
     try!(write!(buffer, "# mandelbrot, max_iter: {}\n", mandel_config.max_iter));
-    try!(write!(buffer, "# computation time: {} ms\n", time_in_ms));
+    if mandel_config.write_meta_data {
+        // TODO: add more meta data: date and time, method, ...
+        try!(write!(buffer, "# computation time: {} ms\n", time_in_ms));
+    }
     try!(write!(buffer, "{0} {0}\n", mandel_config.img_size));
     try!(buffer.write(b"255\n"));
 

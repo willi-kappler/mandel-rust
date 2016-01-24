@@ -70,6 +70,9 @@ Using all cores (including virtual one due to hyper threading) rayon is the fast
 
 # TODO:
 - [ ] Check ArrayFire
+- [ ] Check Collenchyma
+- [ ] Check Timely Dataflow
+- [ ] Check Crossbeam
 - [ ] Use rust-fmt on source code (Thanks to matklad)
 - [ ] Check docopt (instead of clap ? Thanks to matklad)
 
