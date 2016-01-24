@@ -1,7 +1,7 @@
 // Mandelbrot set in rust
 //
-// This code shows how to calculate the set in serial and parallel
-// More parallel versions will be added in the future
+// This code shows how to calculate the set in serial and parallel.
+// More parallel versions will be added in the future.
 //
 // Written by Willi Kappler
 //
@@ -15,17 +15,18 @@ extern crate time;
 extern crate num;
 extern crate scoped_threadpool;
 extern crate simple_parallel;
+extern crate rayon;
 
+// Rust modules
 use std::fs::File;
 use std::io::prelude::Write;
 use std::io::Result;
 use std::io::BufWriter;
 
+// External crates
 use time::{precise_time_ns, now};
 use num::complex::Complex64;
-
 use clap::App;
-use scoped_threadpool::Pool;
 
 // Configuration file, reflects command line options
 #[derive(Copy, Clone)]
@@ -71,7 +72,8 @@ fn parse_arguments() -> MandelConfig {
     assert!(img_size > 0);
     assert!(num_threads > 0);
 
-    println!("Configuration: re1: {:.2}, re2: {:.2}, img1: {:.2}, img2: {:.2}, max_iter: {}, img_size: {}, num_threads: {}", re1, re2, img1, img2, max_iter, img_size, num_threads);
+    println!("Configuration: re1: {:.2}, re2: {:.2}, img1: {:.2}, img2: {:.2}, max_iter: {}, img_size: {}, num_threads: {}",
+        re1, re2, img1, img2, max_iter, img_size, num_threads);
 
     let x_step = (re2 - re1) / (img_size as f64);
     let y_step = (img2 - img1) / (img_size as f64);
@@ -89,7 +91,8 @@ fn parse_arguments() -> MandelConfig {
     }
 }
 
-// The inner iteration  loop of the mandelbrot calculation
+// The inner iteration loop of the mandelbrot calculation
+// See
 fn mandel_iter(max_iter: u32, c: Complex64) -> u32 {
     let mut z: Complex64 = c;
 
@@ -103,8 +106,8 @@ fn mandel_iter(max_iter: u32, c: Complex64) -> u32 {
     iter
 }
 
-// Write calculated mandelbrot set as PPM image
-// Add run time information as comment
+// Write calculated mandelbrot set as PPM image.
+// Add run time information as comment.
 fn write_image(file_name: &str, mandel_config: &MandelConfig, time_in_ms: f64, image: &[u32]) -> Result<()> {
     let mut buffer = BufWriter::new(try!(File::create(file_name)));
 
@@ -133,7 +136,7 @@ fn write_image(file_name: &str, mandel_config: &MandelConfig, time_in_ms: f64, i
     Ok(())
 }
 
-// The serial version of the mandelbrot set calculation
+// The serial version of the mandelbrot set calculation.
 fn serial_mandel(mandel_config: &MandelConfig, image: &mut [u32]) {
     for y in 0..mandel_config.img_size {
         for x in 0..mandel_config.img_size {
@@ -146,9 +149,9 @@ fn serial_mandel(mandel_config: &MandelConfig, image: &mut [u32]) {
     }
 }
 
-// The parallel version of the mandelbrot set calculation, uses scoped thread pool
+// The parallel version of the mandelbrot set calculation, uses scoped thread pool.
 fn parallel_mandel(mandel_config: &MandelConfig, image: &mut [u32]) {
-    let mut pool = Pool::new(mandel_config.num_threads);
+    let mut pool = scoped_threadpool::Pool::new(mandel_config.num_threads);
 
     pool.scoped(|scoped| {
         for (y, slice) in image.chunks_mut(mandel_config.img_size as usize).enumerate() {
@@ -165,7 +168,7 @@ fn parallel_mandel(mandel_config: &MandelConfig, image: &mut [u32]) {
     });
 }
 
-// The parallel version of the mandelbrot set calculation, uses simple parallel
+// The parallel version of the mandelbrot set calculation, uses simple parallel.
 fn simple_parallel_mandel(mandel_config: &MandelConfig, image: &mut [u32]) {
     let mut pool = simple_parallel::Pool::new(mandel_config.num_threads as usize);
 
@@ -180,8 +183,33 @@ fn simple_parallel_mandel(mandel_config: &MandelConfig, image: &mut [u32]) {
     });
 }
 
+// The parallel version of the mandelbrot set calculation, uses rayon.
+fn rayon_mandel(mandel_config: &MandelConfig, image: &mut [u32]) {
+    rayon_mandel_helper(mandel_config, image, 0);
+}
+
+fn rayon_mandel_helper(mandel_config: &MandelConfig, slice: &mut [u32], y: u32) {
+    if slice.len() == (mandel_config.img_size as usize) { // just process one scanline of the mandelbrot image
+        for x in 0..mandel_config.img_size {
+            slice[x as usize] =
+            mandel_iter(mandel_config.max_iter,
+                Complex64{re: mandel_config.re1 + ((x as f64) * mandel_config.x_step),
+                          im: mandel_config.img1 + ((y as f64) * mandel_config.y_step)}
+            );
+        }
+    } else {
+        let mid = slice.len() / 2;
+        let (top, bottom) = slice.split_at_mut(mid);
+        rayon::join(
+            || rayon_mandel_helper(mandel_config, top, y),
+            || rayon_mandel_helper(mandel_config, bottom, y + ((mid as u32) / mandel_config.img_size))
+        );
+    }
+}
+
 // Prepares and runs one version of the mandelbro set calculation
-fn do_run(file_name_prefix: &str, mandel_func: &Fn(&MandelConfig, &mut [u32]) -> (), mandel_config: &MandelConfig, image: &mut [u32], time_now: &str) {
+fn do_run(file_name_prefix: &str, mandel_func: &Fn(&MandelConfig, &mut [u32]) -> (),
+    mandel_config: &MandelConfig, image: &mut [u32], time_now: &str) {
     let start_time = precise_time_ns();
 
     mandel_func(mandel_config, image);
@@ -193,14 +221,18 @@ fn do_run(file_name_prefix: &str, mandel_func: &Fn(&MandelConfig, &mut [u32]) ->
 
     let file_name = format!("{}_{}.ppm", file_name_prefix, &time_now);
 
-    write_image(&file_name, &mandel_config, total_time_in_ms, &image).expect(&format!("Could not open file for writing: '{}'", file_name));
+    write_image(&file_name, &mandel_config, total_time_in_ms, &image).expect(
+        &format!("Could not open file for writing: '{}'", file_name));
 }
 
 fn main() {
     // For example run with:
     // cargo run --release -- --re1=-2.0 --re2=1.0 --img1=-1.5 --img2=1.5 --max_iter=2048 --img_size=1024 --num_threads=2
+    //
     // Or just using the default values:
     // cargo run --release -- --num_threads=2
+    //
+    // Note that the image size must be a power of two
 
     let mandel_config = parse_arguments();
 
@@ -217,4 +249,6 @@ fn main() {
     do_run("parallel_mandel", &parallel_mandel, &mandel_config, &mut image, &time_now);
 
     do_run("simple_parallel_mandel", &simple_parallel_mandel, &mandel_config, &mut image, &time_now);
+
+    do_run("rayon_mandel", &rayon_mandel, &mandel_config, &mut image, &time_now);
 }
