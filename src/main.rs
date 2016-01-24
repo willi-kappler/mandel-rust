@@ -195,6 +195,7 @@ fn rayon_mandel(mandel_config: &MandelConfig, image: &mut [u32]) {
     rayon_mandel_helper(mandel_config, image, 0);
 }
 
+// Rayon helper function for recursive divide-and-conquer call
 fn rayon_mandel_helper(mandel_config: &MandelConfig, slice: &mut [u32], y: u32) {
     if slice.len() == (mandel_config.img_size as usize) { // just process one scanline of the mandelbrot image
         for x in 0..mandel_config.img_size {
@@ -213,6 +214,8 @@ fn rayon_mandel_helper(mandel_config: &MandelConfig, slice: &mut [u32], y: u32) 
         );
     }
 }
+
+
 
 // Prepares and runs one version of the mandelbro set calculation
 fn do_run(file_name_prefix: &str, mandel_func: &Fn(&MandelConfig, &mut [u32]) -> (),

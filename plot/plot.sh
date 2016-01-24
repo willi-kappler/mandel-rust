@@ -14,6 +14,8 @@ gnuplot <<PLOT
     plot "serial.txt" title "serial", \
          "scoped_thread_pool.txt" title "scoped thread pool", \
          "simple_parallel.txt" title "simple parallel", \
-         "rayon.txt" title "rayon"
+         "rayon.txt" title "rayon", \
+         "rayon_git.txt" title "rayon git"
 
 PLOT
+

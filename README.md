@@ -21,6 +21,7 @@ Supported command line options:
         --img_size <IMAGE_SIZE>              size of image in pixel (square, default: 1024, must be a power of two)
         --img1 <IMAGINARY1>                  lower part (default: -1.50)
         --img2 <IMAGINARY2>                  upper part (default: 1.50)
+        --write_meta_data                    write meta data like run time into the ppm file (default: off)
         --max_iter <MAX_ITER>                maximum number of iterations (default: 2048)
         --num_threads <NUMBER_OF_THREADS>    number of threads to use (default: 2)
         --re1 <REAL1>                        left real part (default: -2.0)
@@ -62,6 +63,7 @@ simple parallel | 1 | 2508.58119
 simple parallel | 8 | 389.50966
 simple parallel | 24 | 161.75248
 rayon* | 24 | 139.04431
+rayon git* | 24 | 127.69423
 
 (*) Note that rayon uses whatever number of cores are available at the moment.
 
@@ -69,10 +71,13 @@ With just using one thread the overhead for both scoped thread pool and simple p
 Using all cores (including virtual one due to hyper threading) rayon is the fastest method. Is uses explicit work stealing to utilize all the cores more efficiently.
 
 # TODO:
-- [ ] Check ArrayFire
-- [ ] Check Collenchyma
-- [ ] Check Timely Dataflow
-- [ ] Check Crossbeam
+- [ ] Check [ArrayFire](https://github.com/arrayfire/arrayfire-rust)
+- [ ] Check [Collenchyma](https://github.com/autumnai/collenchyma)
+- [ ] Check [Timely Dataflow](https://github.com/frankmcsherry/timely-dataflow)
+- [ ] Check [Crossbeam](https://github.com/aturon/crossbeam)
+- [ ] Check [rust-threadpool](https://github.com/frewsxcv/rust-threadpool)
+- [ ] Check [jobsteal](https://github.com/rphmeier/jobsteal)
+- [ ] Check [forkjoin](https://github.com/faern/forkjoin)
 - [ ] Use rust-fmt on source code (Thanks to matklad)
 - [ ] Check docopt (instead of clap ? Thanks to matklad)
 
