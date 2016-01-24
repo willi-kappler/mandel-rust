@@ -49,40 +49,24 @@ Measured on a Transtec server with the following specs:
 ![mandelbrot benchmark plot](plot/mandel_bench.png)
 
 
+(Note that not all number of cores have been run in the benchmark)
+
+
 Method | Number of threads | Time taken (in ms)
 -------|-------------------|------------------------
 serial | 1 | 1703.823711703.82371
 scoped thread pool | 1 | 2283.06639
-scoped thread pool | 2 | 1261.97402
-scoped thread pool | 3 | 911.55601
-scoped thread pool | 4 | 730.70325
-scoped thread pool | 5 | 562.70050
-scoped thread pool | 6 | 487.89133
-scoped thread pool | 7 | 435.70740
 scoped thread pool | 8 | 393.57072
-scoped thread pool | 10 | 316.86398
-scoped thread pool | 12 | 272.54214
-scoped thread pool | 14 | 243.76645
-scoped thread pool | 16 | 217.38483
-scoped thread pool | 20 | 190.96532
 scoped thread pool | 24 | 169.02211
 simple parallel | 1 | 2508.58119
-simple parallel | 2 | 1273.13910
-simple parallel | 3 | 871.48674
-simple parallel | 4 | 745.04818
-simple parallel | 5 | 597.11188
-simple parallel | 6 | 512.16674
-simple parallel | 7 | 427.89391
 simple parallel | 8 | 389.50966
-simple parallel | 10 | 332.40532
-simple parallel | 12 | 270.28192
-simple parallel | 14 | 252.61965
-simple parallel | 16 | 216.03580
-simple parallel | 20 | 186.54049
 simple parallel | 24 | 161.75248
 rayon* | 24 | 139.04431
 
 (*) Note that rayon uses whatever number of cores are available at the moment.
+
+With just using one thread the overhead for both scoped thread pool and simple parallel is too high and thus both are slower than the serial version.
+Using all cores (including virtual one due to hyper threading) rayon is the fastest method. Is uses explicit work stealing to utilize all the cores more efficiently.
 
 # TODO:
 - [ ] Check ArrayFire

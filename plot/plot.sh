@@ -5,7 +5,7 @@ gnuplot <<PLOT
     set output "mandel_bench.png"
     set view map
     set xlabel "number of cores"
-    set ylabel "tim [ms]"
+    set ylabel "time [ms]"
     set style data points
     set title "mandelbrot benchmark"
     set xtics 0,2,24
