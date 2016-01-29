@@ -3,7 +3,7 @@
 This code shows how to calculate the set in serial and parallel using Rust and various libraries.
 More parallel versions (with different libraries) will be added in the future.
 
-Written by Willi Kappler, License: MIT - Version 0.2 (2016.01.24)
+Written by Willi Kappler, License: MIT - Version 0.3 (2016.01.29)
 
 ![mandelbrot set](mandel.png)
 
@@ -21,7 +21,9 @@ Supported command line options:
         --img_size <IMAGE_SIZE>              size of image in pixel (square, default: 1024, must be a power of two)
         --img1 <IMAGINARY1>                  lower part (default: -1.50)
         --img2 <IMAGINARY2>                  upper part (default: 1.50)
-        --write_meta_data                    write meta data like run time into the ppm file (default: off)
+        --write_metadata                     write metadata like run time into the ppm file (default: off)
+        --no-ppm                             disable creation of the ppm file, just run the calculation (default: off)
+        --bench                              use all available CPUs (default: off)
         --max_iter <MAX_ITER>                maximum number of iterations (default: 2048)
         --num_threads <NUMBER_OF_THREADS>    number of threads to use (default: 2)
         --re1 <REAL1>                        left real part (default: -2.0)
@@ -34,6 +36,7 @@ It writes the mandelbrot set out as PPN image files. For each method one image f
 - Clap: command line parsing
 - Time: timing each run
 - Num: complex numbers
+- Num_cpus: for the `--bench` flag, determine the total number of cpus
 - Scoped_threadpool: manual threading
 - Simple_parallel: using parallel for loop
 - Rayon: using recursive fork-join (divide-and-conquer) call
@@ -62,8 +65,7 @@ scoped thread pool | 24 | 169.02211
 simple parallel | 1 | 2508.58119
 simple parallel | 8 | 389.50966
 simple parallel | 24 | 161.75248
-rayon* | 24 | 139.04431
-rayon git* | 24 | 127.69423
+rayon* 0.2 | 24 | 127.69423
 
 (*) Note that rayon uses whatever number of cores are available at the moment.
 
@@ -75,8 +77,8 @@ Using all cores (including virtual one due to hyper threading) rayon is the fast
 - [ ] Check [Collenchyma](https://github.com/autumnai/collenchyma)
 - [ ] Check [Timely Dataflow](https://github.com/frankmcsherry/timely-dataflow)
 - [ ] Check [Crossbeam](https://github.com/aturon/crossbeam)
-- [ ] Check [rust-threadpool](https://github.com/frewsxcv/rust-threadpool)
-- [ ] Check [jobsteal](https://github.com/rphmeier/jobsteal)
+- [x] Check [rust-scoped-pool](https://github.com/reem/rust-scoped-pool)
+- [x] Check [jobsteal](https://github.com/rphmeier/jobsteal)
 - [ ] Check [forkjoin](https://github.com/faern/forkjoin)
 - [ ] Use rust-fmt on source code (Thanks to matklad)
 - [ ] Check docopt (instead of clap ? Thanks to matklad)

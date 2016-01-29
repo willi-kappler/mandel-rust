@@ -1,13 +1,17 @@
 [package]
 name = "mandel"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["Willi Kappler"]
 
 [dependencies]
 time = "0.1"
 num = "0.1"
 clap = "1"
+num_cpus = "0.2"
 scoped_threadpool = "0.1"
 simple_parallel = "0.3"
-rayon = {git = "https://github.com/nikomatsakis/rayon.git"}
+# rayon = {git = "https://github.com/nikomatsakis/rayon.git"}
+rayon = "0.2"
 crossbeam = "0.2"
+scoped-pool = "0.1"
+jobsteal = "0.2"
