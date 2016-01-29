@@ -87,9 +87,12 @@ job_steal | 24 | 135.46289
 
 (*) Note that rayon uses whatever number of cores are available at the moment.
 
-With just using one thread the overhead for both scoped thread pool and simple parallel is too high and thus both are slower than the serial version.
-Using all cores (including virtual one due to hyper threading) rayon_par_iter is the fastest method. Is uses explicit work stealing to utilize all the cores more efficiently.
+With just using one thread the overhead for both scoped thread pool, rust scoped pool and simple parallel is too high and thus they are slower than the serial version.
+Using all cores (including virtual one due to hyper threading) rayon_par_iter is the fastest method. It uses explicit work stealing to utilize all the cores more efficiently.
 The job_steal crate also does a good job.
+
+As always take these results with a grain of salt, they just show a general direction.
+If in doubt just do run some benchmarks with different crates for your specific code (which is always a good thing to do).
 
 # TODO:
 - [ ] Check [ArrayFire](https://github.com/arrayfire/arrayfire-rust)
@@ -106,5 +109,6 @@ The job_steal crate also does a good job.
 - [ ] Automate benchmark: re-run each test multiple times (user specified command line argument) and take the average
 - [ ] Automate benchmark: write all results to text files and make a nice plot
 
+- [ ] Use a bigger image size and a higher number of iterations for the next release.
 
 Any feedback is welcome!
