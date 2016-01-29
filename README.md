@@ -30,7 +30,7 @@ Supported command line options:
         --re2 <REAL2>                        right real part (default: 1.0)
 
 The main program runs the calculation 4 times: 1 x single threaded and currently 3 x multi threaded.
-It writes the mandelbrot set out as PPN image files. For each method one image file is created.
+It writes the mandelbrot set out as PPM image files. For each method one image file is created.
 
 # Used crates:
 - Clap: command line parsing
@@ -55,8 +55,8 @@ Measured on a Transtec server with the following specs:
 ![mandelbrot benchmark plot](plot/mandel_bench.png)
 
 
-(Note that not all number of cores have been run in the benchmark)
-
+(Note1: that not all number of cores have been run in the benchmark)
+(Note2: currently the machine is occupied, I'll update the plots and numbers later)
 
 Method | Number of threads | Time taken (in ms)
 -------|-------------------|------------------------
