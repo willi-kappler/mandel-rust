@@ -32,6 +32,12 @@ Supported command line options:
 The main program runs the calculation 4 times: 1 x single threaded and currently 3 x multi threaded.
 It writes the mandelbrot set out as PPM image files. For each method one image file is created.
 
+To check if all the images are equal (and thus that all the computations are correct) you can use this command:
+
+    for i in *.ppm; do md5sum $i; done
+
+(This works only if the flag `--write_metadata` has not been set)
+
 # Used crates:
 - Clap: command line parsing
 - Time: timing each run
