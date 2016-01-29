@@ -47,10 +47,10 @@ Or even better:
 - Time: timing each run
 - Num: complex numbers
 - Num_cpus: for the `--bench` flag, determine the total number of cpus
-- Scoped_threadpool: use scope and thread pool
-- Simple_parallel: use scope and thread pool
+- Scoped threadpool: use scope and thread pool
+- Simple parallel: use scope and thread pool
 - Rayon: using recursive fork-join (divide-and-conquer) call and par_iter
-- Rust_scoped_pool: use scope and thread pool
+- Rust scoped pool: use scope and thread pool
 - Jobsteal: use scope and thread pool
 
 # Benchmark
@@ -70,26 +70,26 @@ Measured on a Transtec server with the following specs:
 Method | Number of threads | Time taken (in ms)
 -------|-------------------|------------------------
 serial | 1 | 1703.82371
-scoped thread pool | 1 | 2283.06639
-scoped thread pool | 8 | 393.57072
-scoped thread pool | 24 | 169.02211
+scoped threadpool | 1 | 2283.06639
+scoped threadpool | 8 | 393.57072
+scoped threadpool | 24 | 169.02211
 simple parallel | 1 | 2508.58119
 simple parallel | 8 | 389.50966
 simple parallel | 24 | 161.75248
-rayon* 0.2 | 24 | 127.69423
-rayon_par_iter* 0.2 | 24 | 106.66261
-rust_scoped_pool | 1 | 2178.49247
-rust_scoped_pool | 8 | 318.91450
-rust_scoped_pool | 24 | 141.91438
-job_steal | 1 | 1143.25212
-job_steal | 8 | 314.39410
-job_steal | 24 | 135.46289
+rayon* v0.2 | 24 | 127.69423
+rayon par_iter* v0.2 | 24 | 106.66261
+rust scoped pool | 1 | 2178.49247
+rust scoped pool | 8 | 318.91450
+rust scoped pool | 24 | 141.91438
+jobsteal | 1 | 1143.25212
+jobsteal | 8 | 314.39410
+jobsteal | 24 | 135.46289
 
 (*) Note that rayon uses whatever number of cores are available at the moment.
 
 With just using one thread the overhead for both scoped thread pool, rust scoped pool and simple parallel is too high and thus they are slower than the serial version.
-Using all cores (including virtual one due to hyper threading) rayon_par_iter is the fastest method. It uses explicit work stealing to utilize all the cores more efficiently.
-The job_steal crate also does a good job.
+Using all cores (including virtual one due to hyper threading) rayon par_iter is the fastest method. It uses explicit work stealing to utilize all the cores more efficiently.
+The jobsteal crate also does a good job.
 
 As always take these results with a grain of salt, they just show a general direction.
 If in doubt just do run some benchmarks with different crates for your specific code (which is always a good thing to do).
