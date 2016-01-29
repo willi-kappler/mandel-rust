@@ -62,6 +62,7 @@ Measured on a Transtec server with the following specs:
 
 
 (Note1: that not all number of cores have been run in the benchmark)
+
 (Note2: currently the machine is occupied, I'll update the plots and numbers later)
 
 Method | Number of threads | Time taken (in ms)
@@ -88,6 +89,7 @@ Using all cores (including virtual one due to hyper threading) rayon is the fast
 - [x] Check [rust-scoped-pool](https://github.com/reem/rust-scoped-pool)
 - [x] Check [jobsteal](https://github.com/rphmeier/jobsteal)
 - [ ] Check [forkjoin](https://github.com/faern/forkjoin)
+- [ ] Check [rust-stm](https://github.com/Marthog/rust-stm)
 - [ ] Use rust-fmt on source code (Thanks to matklad)
 - [ ] Check docopt (instead of clap ? Thanks to matklad)
 
