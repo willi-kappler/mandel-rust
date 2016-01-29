@@ -69,7 +69,7 @@ Measured on a Transtec server with the following specs:
 
 Method | Number of threads | Time taken (in ms)
 -------|-------------------|------------------------
-serial | 1 | 1703.823711703.82371
+serial | 1 | 1703.82371
 scoped thread pool | 1 | 2283.06639
 scoped thread pool | 8 | 393.57072
 scoped thread pool | 24 | 169.02211
@@ -109,6 +109,6 @@ If in doubt just do run some benchmarks with different crates for your specific 
 - [ ] Automate benchmark: re-run each test multiple times (user specified command line argument) and take the average
 - [ ] Automate benchmark: write all results to text files and make a nice plot
 
-- [ ] Use a bigger image size and a higher number of iterations for the next release.
+- [ ] Use a bigger image size and a higher number of iterations for the next release
 
 Any feedback is welcome!
