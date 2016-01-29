@@ -29,12 +29,16 @@ Supported command line options:
         --re1 <REAL1>                        left real part (default: -2.0)
         --re2 <REAL2>                        right real part (default: 1.0)
 
-The main program runs the calculation 4 times: 1 x single threaded and currently 3 x multi threaded.
+The main program runs the calculation 7 times: 1 x single threaded and currently 6 x multi threaded.
 It writes the mandelbrot set out as PPM image files. For each method one image file is created.
 
 To check if all the images are equal (and thus that all the computations are correct) you can use this command:
 
     for i in *.ppm; do md5sum $i; done
+
+Or even better:
+
+    for i in *.ppm; do md5sum $i; done | cut -c1-32 | uniq
 
 (This works only if the flag `--write_metadata` has not been set)
 
@@ -61,9 +65,7 @@ Measured on a Transtec server with the following specs:
 ![mandelbrot benchmark plot](plot/mandel_bench.png)
 
 
-(Note1: that not all number of cores have been run in the benchmark)
-
-(Note2: currently the machine is occupied, I'll update the plots and numbers later)
+(Note: that not all number of cores have been run in the benchmark)
 
 Method | Number of threads | Time taken (in ms)
 -------|-------------------|------------------------
@@ -75,11 +77,19 @@ simple parallel | 1 | 2508.58119
 simple parallel | 8 | 389.50966
 simple parallel | 24 | 161.75248
 rayon* 0.2 | 24 | 127.69423
+rayon_par_iter* 0.2 | 24 | 106.66261
+rust_scoped_pool | 1 | 2178.49247
+rust_scoped_pool | 8 | 318.91450
+rust_scoped_pool | 24 | 141.91438
+job_steal | 1 | 1143.25212
+job_steal | 8 | 314.39410
+job_steal | 24 | 135.46289
 
 (*) Note that rayon uses whatever number of cores are available at the moment.
 
 With just using one thread the overhead for both scoped thread pool and simple parallel is too high and thus both are slower than the serial version.
 Using all cores (including virtual one due to hyper threading) rayon is the fastest method. Is uses explicit work stealing to utilize all the cores more efficiently.
+The job_steal crate also does a good job. rayon_par_iter is currently the fastest method.
 
 # TODO:
 - [ ] Check [ArrayFire](https://github.com/arrayfire/arrayfire-rust)
@@ -92,5 +102,9 @@ Using all cores (including virtual one due to hyper threading) rayon is the fast
 - [ ] Check [rust-stm](https://github.com/Marthog/rust-stm)
 - [ ] Use rust-fmt on source code (Thanks to matklad)
 - [ ] Check docopt (instead of clap ? Thanks to matklad)
+
+- [ ] Automate benchmark: re-run each test multiple times (user specified command line argument) and take the average
+- [ ] Automate benchmark: write all results to text files and make a nice plot
+
 
 Any feedback is welcome!
