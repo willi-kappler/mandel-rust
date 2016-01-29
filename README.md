@@ -37,9 +37,11 @@ It writes the mandelbrot set out as PPN image files. For each method one image f
 - Time: timing each run
 - Num: complex numbers
 - Num_cpus: for the `--bench` flag, determine the total number of cpus
-- Scoped_threadpool: manual threading
-- Simple_parallel: using parallel for loop
-- Rayon: using recursive fork-join (divide-and-conquer) call
+- Scoped_threadpool: use scope and thread pool
+- Simple_parallel: use scope and thread pool
+- Rayon: using recursive fork-join (divide-and-conquer) call and par_iter
+- Rust_scoped_pool: use scope and thread pool
+- Jobsteal: use scope and thread pool
 
 # Benchmark
 Measured on a Transtec server with the following specs:
