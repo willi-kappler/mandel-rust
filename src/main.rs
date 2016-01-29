@@ -61,7 +61,7 @@ fn parse_arguments() -> MandelConfig {
              --img2=[IMAGINARY2] 'upper part (default: 1.50)'
              --write_metadata 'write metadata like run time into the ppm file (default: off)'
              --no-ppm 'disable creation of the ppm file, just run the calculation (default: off)'
-             --bench 'use all available CPUs (default: off)'
+             --bench 'use all available CPUs (default: off), will change in the future'
              --max_iter=[MAX_ITER] 'maximum number of iterations (default: 2048)'
              --img_size=[IMAGE_SIZE] 'size of image in pixel (square, default: 1024, must be a power of two)'
              --num_threads=[NUMBER_OF_THREADS] 'number of threads to use (default: 2)'")

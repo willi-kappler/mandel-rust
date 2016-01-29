@@ -23,7 +23,7 @@ Supported command line options:
         --img2 <IMAGINARY2>                  upper part (default: 1.50)
         --write_metadata                     write metadata like run time into the ppm file (default: off)
         --no-ppm                             disable creation of the ppm file, just run the calculation (default: off)
-        --bench                              use all available CPUs (default: off)
+        --bench                              use all available CPUs (default: off), will change in the future
         --max_iter <MAX_ITER>                maximum number of iterations (default: 2048)
         --num_threads <NUMBER_OF_THREADS>    number of threads to use (default: 2)
         --re1 <REAL1>                        left real part (default: -2.0)
