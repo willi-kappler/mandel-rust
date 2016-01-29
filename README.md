@@ -3,7 +3,7 @@
 This code shows how to calculate the set in serial and parallel using Rust and various libraries.
 More parallel versions (with different libraries) will be added in the future.
 
-Written by Willi Kappler, License: MIT - Version 0.3 (2016.01.29)
+Written by Willi Kappler, License: MIT - Version 0.3 (2016.01.30)
 
 ![mandelbrot set](mandel.png)
 
@@ -103,6 +103,7 @@ If in doubt just do run some benchmarks with different crates for your specific 
 - [x] Check [jobsteal](https://github.com/rphmeier/jobsteal)
 - [ ] Check [forkjoin](https://github.com/faern/forkjoin)
 - [ ] Check [rust-stm](https://github.com/Marthog/rust-stm)
+- [ ] Check [kirk](https://github.com/kinghajj/kirk)
 - [ ] Use rust-fmt on source code (Thanks to matklad)
 - [ ] Check docopt (instead of clap ? Thanks to matklad)
 
