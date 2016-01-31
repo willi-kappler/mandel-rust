@@ -258,6 +258,26 @@ fn rust_scoped_pool(mandel_config: &MandelConfig, image: &mut [u32]) {
     });
 }
 
+// jobsteal helper for divide and conquer version.
+fn job_steal_helper<'a, 'b>(mandel_config: &MandelConfig, spawner: &jobsteal::Spawner<'a, 'b>, slice: &mut [u32], y: u32) {
+    if slice.len() == (mandel_config.img_size as usize) { // just process one scanline of the mandelbrot image
+        for x in 0..mandel_config.img_size {
+            slice[x as usize] =
+            mandel_iter(mandel_config.max_iter,
+                Complex64{re: mandel_config.re1 + ((x as f64) * mandel_config.x_step),
+                          im: mandel_config.img1 + ((y as f64) * mandel_config.y_step)}
+            );
+        }
+    } else {
+        let mid = slice.len() / 2;
+        let (top, bottom) = slice.split_at_mut(mid);
+        spawner.join(
+            |inner| job_steal_helper(mandel_config, inner, top, y),
+            |inner| job_steal_helper(mandel_config, inner, bottom, y + ((mid as u32) / mandel_config.img_size))
+        );
+    }
+}
+
 // The parallel version of the mandelbrot set calculation, uses jobsteal.
 fn job_steal(mandel_config: &MandelConfig, image: &mut [u32]) {
     let mut pool = jobsteal::make_pool(mandel_config.num_threads as usize).unwrap();
@@ -275,6 +295,15 @@ fn job_steal(mandel_config: &MandelConfig, image: &mut [u32]) {
             });
         }
     });
+}
+
+// The parallel version of the mandelbrot set calculation, uses jobsteal with divide-and-conquer strategy.
+fn job_steal_join(mandel_config: &MandelConfig, image: &mut [u32]) {
+    let mut pool = jobsteal::make_pool(mandel_config.num_threads as usize).unwrap();
+    
+    pool.scope(|scope| {
+        job_steal_helper(mandel_config, scope, image, 0);
+    })
 }
 
 // Prepares and runs one version of the mandelbro set calculation
@@ -329,5 +358,7 @@ fn main() {
     do_run("rust_scoped_pool", &rust_scoped_pool, &mandel_config, &mut image, &time_now);
 
     do_run("job_steal", &job_steal, &mandel_config, &mut image, &time_now);
+    
+    do_run("job_steal_join", &job_steal_join, &mandel_config, &mut image, &time_now);
 
 }
