@@ -225,7 +225,7 @@ fn rayon_helper(mandel_config: &MandelConfig, slice: &mut [u32], y: u32) {
     }
 }
 
-// The parallel version of the mandelbrot set calculation, uses rayon par_iter.
+// The parallel version of the mandelbrot set calculation, uses rayon par_iter_mut.
 fn rayon_par_iter(mandel_config: &MandelConfig, image: &mut [u32]) {
 
     image.par_iter_mut().enumerate().for_each(

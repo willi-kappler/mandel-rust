@@ -15,7 +15,7 @@ gnuplot <<PLOT
          "scoped_thread_pool.txt" title "scoped thread pool", \
          "simple_parallel.txt" title "simple parallel", \
          "rayon.txt" title "rayon", \
-         "rayon_par_iter.txt" title "rayon par iter", \
+         "rayon_par_iter_mut.txt" title "rayon par_iter_mut", \
          "rust_scoped_pool.txt" title "rust scoped pool", \
          "job_steal.txt" title "job steal"
 
