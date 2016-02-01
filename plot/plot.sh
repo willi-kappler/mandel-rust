@@ -17,6 +17,8 @@ gnuplot <<PLOT
          "rayon.txt" title "rayon", \
          "rayon_par_iter_mut.txt" title "rayon par_iter_mut", \
          "rust_scoped_pool.txt" title "rust scoped pool", \
-         "job_steal.txt" title "job steal"
+         "job_steal.txt" title "job steal", \
+         "job_steal_join.txt" title "job steal join", \
+         "kirk_crossbeam.txt" title "kirk crossbeam"
 
 PLOT

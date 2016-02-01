@@ -82,15 +82,18 @@ rayon par_iter_mut* v0.2 | 24 | 106.66261
 rust scoped pool | 1 | 2178.49247
 rust scoped pool | 8 | 318.91450
 rust scoped pool | 24 | 141.91438
-jobsteal | 1 | 1143.25212
-jobsteal | 8 | 314.39410
-jobsteal | 24 | 135.46289
+jobsteal | 8 | 350.47366
+jobsteal | 24 | 128.17375
+jobsteal join | 8 | 245.47314
+jobsteal join | 24 | 98.78363
+kirk crossbeam | 1 | 2432.77082
+kirk crossbeam | 8 | 340.31774
+kirk crossbeam | 24 | 115.44917
 
 (*) Note that rayon uses whatever number of cores are available at the moment.
 
-With just using one thread the overhead for both scoped thread pool, rust scoped pool and simple parallel is too high and thus they are slower than the serial version.
-Using all cores (including virtual one due to hyper threading) rayon par_iter_mut is the fastest method. It uses explicit work stealing to utilize all the cores more efficiently.
-The jobsteal crate also does a good job.
+With just using one thread the overhead for scoped thread pool, rust scoped pool simple parallel and kirk is too high and thus they are slower than the serial version.
+Using all cores (including virtual one due to hyper threading) jobsteal join is the fastest method. It uses explicit work stealing (like Rayon) to utilize all the cores more efficiently.
 
 As always take these results with a grain of salt, they just show a general direction.
 If in doubt just do run some benchmarks with different crates for your specific code (which is always a good thing to do).
@@ -99,12 +102,12 @@ If in doubt just do run some benchmarks with different crates for your specific 
 - [ ] Check [ArrayFire](https://github.com/arrayfire/arrayfire-rust)
 - [ ] Check [Collenchyma](https://github.com/autumnai/collenchyma)
 - [ ] Check [Timely Dataflow](https://github.com/frankmcsherry/timely-dataflow)
-- [ ] Check [Crossbeam](https://github.com/aturon/crossbeam)
+- [x] Check [Crossbeam](https://github.com/aturon/crossbeam)
 - [x] Check [rust-scoped-pool](https://github.com/reem/rust-scoped-pool)
 - [x] Check [jobsteal](https://github.com/rphmeier/jobsteal)
 - [ ] Check [forkjoin](https://github.com/faern/forkjoin)
 - [ ] Check [rust-stm](https://github.com/Marthog/rust-stm)
-- [ ] Check [kirk](https://github.com/kinghajj/kirk)
+- [x] Check [kirk](https://github.com/kinghajj/kirk)
 - [ ] Use rust-fmt on source code (Thanks to matklad)
 - [ ] Check docopt (instead of clap ? Thanks to matklad)
 
