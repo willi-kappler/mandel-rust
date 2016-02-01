@@ -19,6 +19,8 @@ extern crate simple_parallel;
 extern crate rayon;
 extern crate scoped_pool;
 extern crate jobsteal;
+extern crate kirk;
+extern crate crossbeam;
 
 // Rust modules
 use std::fs::File;
@@ -31,6 +33,7 @@ use time::{precise_time_ns, now};
 use num::complex::Complex64;
 use clap::App;
 use rayon::par_iter::*;
+use kirk::crew::deque::Options;
 
 // Configuration file, reflects command line options
 #[derive(Copy, Clone)]
@@ -60,7 +63,7 @@ fn parse_arguments() -> MandelConfig {
              --img1=[IMAGINARY1] 'lower part (default: -1.50)'
              --img2=[IMAGINARY2] 'upper part (default: 1.50)'
              --write_metadata 'write metadata like run time into the ppm file (default: off)'
-             --no-ppm 'disable creation of the ppm file, just run the calculation (default: off)'
+             --no_ppm 'disable creation of the ppm file, just run the calculation (default: off)'
              --bench 'use all available CPUs (default: off), will change in the future'
              --max_iter=[MAX_ITER] 'maximum number of iterations (default: 2048)'
              --img_size=[IMAGE_SIZE] 'size of image in pixel (square, default: 1024, must be a power of two)'
@@ -73,7 +76,7 @@ fn parse_arguments() -> MandelConfig {
     let img2 = value_t!(matches.value_of("IMAGINARY2"), f64).unwrap_or(1.5);
     let metadata = matches.is_present("write_metadata");
     let bench = matches.is_present("bench");
-    let no_ppm = matches.is_present("no-ppm");
+    let no_ppm = matches.is_present("no_ppm");
     let max_iter = value_t!(matches.value_of("MAX_ITER"), u32).unwrap_or(2048);
     let img_size = value_t!(matches.value_of("IMAGE_SIZE"), u32).unwrap_or(1024);
     let num_threads = if bench { num_cpus::get() as u32 } else { value_t!(matches.value_of("NUMBER_OF_THREADS"), u32).unwrap_or(2) };
@@ -306,7 +309,25 @@ fn job_steal_helper<'a, 'b>(mandel_config: &MandelConfig, spawner: &jobsteal::Sp
     }
 }
 
-// Prepares and runs one version of the mandelbro set calculation
+// The parallel version of the mandelbrot set calculation, uses kirk and crossbeam.
+fn kirk_crossbeam(mandel_config: &MandelConfig, image: &mut [u32]) {
+    crossbeam::scope(|scope| {
+        let mut pool = kirk::Pool::<kirk::Deque<kirk::Task>>::scoped(scope, Options::default());
+        for (y, slice) in image.chunks_mut(mandel_config.img_size as usize).enumerate() {
+            pool.push(move || {
+                for x in 0..mandel_config.img_size {
+                    slice[x as usize] =
+                    mandel_iter(mandel_config.max_iter,
+                        Complex64{re: mandel_config.re1 + ((x as f64) * mandel_config.x_step),
+                                  im: mandel_config.img1 + ((y as f64) * mandel_config.y_step)}
+                    );
+                }
+            })
+        }
+    });
+}
+
+// Prepares and runs one version of the mandelbrot set calculation.
 fn do_run(file_name_prefix: &str, mandel_func: &Fn(&MandelConfig, &mut [u32]) -> (),
     mandel_config: &MandelConfig, image: &mut [u32], time_now: &str) {
     let start_time = precise_time_ns();
@@ -363,4 +384,5 @@ fn main() {
         do_run("job_steal_join", &job_steal_join, &mandel_config, &mut image, &time_now);
     }
 
+    do_run("kirk_crossbeam", &kirk_crossbeam, &mandel_config, &mut image, &time_now);
 }

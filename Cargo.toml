@@ -12,6 +12,7 @@ scoped_threadpool = "0.1"
 simple_parallel = "0.3"
 # rayon = {git = "https://github.com/nikomatsakis/rayon.git"}
 rayon = "0.2"
-crossbeam = "0.2"
+crossbeam = {git = "https://github.com/aturon/crossbeam.git"}
 scoped-pool = "0.1"
 jobsteal = "0.2"
+kirk = {git = "https://github.com/kinghajj/kirk.git"}
