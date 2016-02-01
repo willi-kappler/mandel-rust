@@ -71,24 +71,24 @@ Measured on a Transtec server with the following specs:
 Method | Number of threads | Time taken (in ms)
 -------|-------------------|------------------------
 serial | 1 | 1703.82371
-scoped threadpool | 1 | 2283.06639
-scoped threadpool | 8 | 393.57072
-scoped threadpool | 24 | 169.02211
-simple parallel | 1 | 2508.58119
-simple parallel | 8 | 389.50966
-simple parallel | 24 | 161.75248
+scoped threadpool v0.1 | 1 | 2283.06639
+scoped threadpool v0.1 | 8 | 393.57072
+scoped threadpool v0.1 | 24 | 169.02211
+simple parallel v0.3 | 1 | 2508.58119
+simple parallel v0.3 | 8 | 389.50966
+simple parallel v0.3 | 24 | 161.75248
 rayon* v0.2 | 24 | 127.69423
 rayon par_iter_mut* v0.2 | 24 | 106.66261
-rust scoped pool | 1 | 2178.49247
-rust scoped pool | 8 | 318.91450
-rust scoped pool | 24 | 141.91438
-jobsteal | 8 | 350.47366
-jobsteal | 24 | 128.17375
-jobsteal join | 8 | 245.47314
-jobsteal join | 24 | 98.78363
-kirk crossbeam | 1 | 2432.77082
-kirk crossbeam | 8 | 340.31774
-kirk crossbeam | 24 | 115.44917
+rust scoped pool v0.1 | 1 | 2178.49247
+rust scoped pool v0.1 | 8 | 318.91450
+rust scoped pool v0.1 | 24 | 141.91438
+jobsteal v0.2 | 8 | 350.47366
+jobsteal v0.2 | 24 | 128.17375
+jobsteal join v0.2 | 8 | 245.47314
+jobsteal join v0.2 | 24 | 98.78363
+kirk git + crossbeam git | 1 | 2432.77082
+kirk git + crossbeam git | 8 | 340.31774
+kirk git + crossbeam git | 24 | 115.44917
 
 (*) Note that rayon uses whatever number of cores are available at the moment.
 
