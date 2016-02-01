@@ -22,7 +22,7 @@ Supported command line options:
         --img1 <IMAGINARY1>                  lower part (default: -1.50)
         --img2 <IMAGINARY2>                  upper part (default: 1.50)
         --write_metadata                     write metadata like run time into the ppm file (default: off)
-        --no-ppm                             disable creation of the ppm file, just run the calculation (default: off)
+        --no_ppm                             disable creation of the ppm file, just run the calculation (default: off)
         --bench                              use all available CPUs (default: off), will change in the future
         --max_iter <MAX_ITER>                maximum number of iterations (default: 2048)
         --num_threads <NUMBER_OF_THREADS>    number of threads to use (default: 2)
@@ -49,9 +49,10 @@ Or even better:
 - Num_cpus: for the `--bench` flag, determine the total number of cpus
 - Scoped threadpool: use scope and thread pool
 - Simple parallel: use scope and thread pool
-- Rayon: using recursive fork-join (divide-and-conquer) call and par_iter_mut
+- Rayon: using recursive divide-and-conquer call with join, use par_iter_mut
 - Rust scoped pool: use scope and thread pool
-- Jobsteal: use scope and thread pool
+- Jobsteal: use scope and thread pool, use join (divide-and-conquer)
+- Kirk + crossbeam: use scope and thread pool
 
 # Benchmark
 Measured on a Transtec server with the following specs:

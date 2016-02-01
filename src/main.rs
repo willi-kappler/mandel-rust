@@ -79,7 +79,8 @@ fn parse_arguments() -> MandelConfig {
     let no_ppm = matches.is_present("no_ppm");
     let max_iter = value_t!(matches.value_of("MAX_ITER"), u32).unwrap_or(2048);
     let img_size = value_t!(matches.value_of("IMAGE_SIZE"), u32).unwrap_or(1024);
-    let num_threads = if bench { num_cpus::get() as u32 } else { value_t!(matches.value_of("NUMBER_OF_THREADS"), u32).unwrap_or(2) };
+    let num_threads = if bench { num_cpus::get() as u32 } else {
+        value_t!(matches.value_of("NUMBER_OF_THREADS"), u32).unwrap_or(2) };
 
     assert!(re1 < re2);
     assert!(img1 < img2);
@@ -290,7 +291,8 @@ fn job_steal_join(mandel_config: &MandelConfig, image: &mut [u32]) {
 }
 
 // jobsteal helper for divide and conquer version.
-fn job_steal_helper<'a, 'b>(mandel_config: &MandelConfig, spawner: &jobsteal::Spawner<'a, 'b>, slice: &mut [u32], y: u32) {
+fn job_steal_helper<'a, 'b>(mandel_config: &MandelConfig, spawner: &jobsteal::Spawner<'a, 'b>,
+                            slice: &mut [u32], y: u32) {
     if slice.len() == (mandel_config.img_size as usize) { // just process one scanline of the mandelbrot image
         for x in 0..mandel_config.img_size {
             slice[x as usize] =
@@ -312,7 +314,8 @@ fn job_steal_helper<'a, 'b>(mandel_config: &MandelConfig, spawner: &jobsteal::Sp
 // The parallel version of the mandelbrot set calculation, uses kirk and crossbeam.
 fn kirk_crossbeam(mandel_config: &MandelConfig, image: &mut [u32]) {
     crossbeam::scope(|scope| {
-        let mut pool = kirk::Pool::<kirk::Deque<kirk::Task>>::scoped(scope, Options::default());
+        let mut pool = kirk::Pool::<kirk::Deque<kirk::Task>>::scoped(scope,
+            Options{ num_workers: mandel_config.num_threads as usize, .. Options::default()});
         for (y, slice) in image.chunks_mut(mandel_config.img_size as usize).enumerate() {
             pool.push(move || {
                 for x in 0..mandel_config.img_size {
