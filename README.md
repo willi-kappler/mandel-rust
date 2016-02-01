@@ -3,7 +3,7 @@
 This code shows how to calculate the set in serial and parallel using Rust and various libraries.
 More parallel versions (with different libraries) will be added in the future.
 
-Written by Willi Kappler, License: MIT - Version 0.3 (2016.01.30)
+Written by Willi Kappler, License: MIT - Version 0.4 (2016.02.02)
 
 ![mandelbrot set](mandel.png)
 
@@ -29,7 +29,7 @@ Supported command line options:
         --re1 <REAL1>                        left real part (default: -2.0)
         --re2 <REAL2>                        right real part (default: 1.0)
 
-The main program runs the calculation 7 times: 1 x single threaded and currently 6 x multi threaded.
+The main program runs the calculation 9 times: 1 x single threaded and currently 8 x multi threaded.
 It writes the mandelbrot set out as PPM image files. For each method one image file is created.
 
 To check if all the images are equal (and thus that all the computations are correct) you can use this command:
@@ -59,7 +59,7 @@ Measured on a Transtec server with the following specs:
 - RAM: 32 GB
 - CPU: 2 x Intel Xeon(R) CPU E5-2620 v3 @ 2.40GHz (12 Cores, with hyper threading 24 cores)
 - Operating system: 64 bit Ubuntu Server 14.04
-- Rust version: rustc 1.5.0 (3d7cd77e4 2015-12-04)
+- Rust version: rustc 1.6.0 (c30b771ad 2016-01-19)
 - Mandel configuration: re1: -2.00, re2: 1.00, img1: -1.50, img2: 1.50, max_iter: 2048, img_size: 1024
 
 
