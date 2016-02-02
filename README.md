@@ -43,16 +43,16 @@ Or even better:
 (This works only if the flag `--write_metadata` has not been set)
 
 # Used crates:
-- (Clap)[https://github.com/kbknapp/clap-rs]: command line parsing
-- (Time)[https://github.com/rust-lang-deprecated/time]: timing each run
-- (Num)[https://github.com/rust-num/num]: complex numbers
-- (Num_cpus)[https://github.com/seanmonstar/num_cpus]: for the `--bench` flag, determine the total number of cpus
-- (Scoped threadpool)[https://github.com/Kimundi/scoped-threadpool-rs]: use scope and thread pool
-- (Simple parallel)[https://github.com/huonw/simple_parallel]: use scope and thread pool
-- (Rayon)[https://github.com/nikomatsakis/rayon]: using recursive divide-and-conquer call with join, use par_iter_mut
-- (Rust scoped pool)[https://github.com/reem/rust-scoped-pool]: use scope and thread pool
-- (Jobsteal)[https://github.com/rphmeier/jobsteal]: use scope and thread pool, use join (divide-and-conquer)
-- (Kirk)[https://github.com/kinghajj/kirk] + (crossbeam)[https://github.com/aturon/crossbeam]: use scope and thread pool
+- [Clap](https://github.com/kbknapp/clap-rs): command line parsing
+- [Time](https://github.com/rust-lang-deprecated/time): timing each run
+- [Num](https://github.com/rust-num/num): complex numbers
+- [Num_cpus](https://github.com/seanmonstar/num_cpus): for the `--bench` flag, determine the total number of cpus
+- [Scoped threadpool](https://github.com/Kimundi/scoped-threadpool-rs): use scope and thread pool
+- [Simple parallel](https://github.com/huonw/simple_parallel): use scope and thread pool
+- [Rayon](https://github.com/nikomatsakis/rayon): using recursive divide-and-conquer call with join, use par_iter_mut
+- [Rust scoped pool](https://github.com/reem/rust-scoped-pool): use scope and thread pool
+- [Jobsteal](https://github.com/rphmeier/jobsteal): use scope and thread pool, use join [divide-and-conquer]
+- [Kirk](https://github.com/kinghajj/kirk) + [crossbeam](https://github.com/aturon/crossbeam): use scope and thread pool
 
 # Benchmark:
 Measured on a Transtec server with the following specs:
