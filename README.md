@@ -44,9 +44,9 @@ Or even better:
 
 Discussion in the Rust user forum:
 
-- [current version (v0.3)](https://users.rust-lang.org/t/mandel-rust-v0-3-more-crates-more-options/4468):
+- [current version (v0.3)](https://users.rust-lang.org/t/mandel-rust-v0-3-more-crates-more-options/4468)
 
-- [old version (v0.2)](https://users.rust-lang.org/t/new-version-of-mandel-rust-uses-rayon-added-benchmark/4403):
+- [old version (v0.2)](https://users.rust-lang.org/t/new-version-of-mandel-rust-uses-rayon-added-benchmark/4403)
 
 
 
