@@ -1,4 +1,4 @@
-# mandel-rust: Mandelbrot set in rust
+# mandel-rust: Mandelbrot set in Rust
 
 This code shows how to calculate the set in serial and parallel using Rust and various libraries.
 More parallel versions (with different libraries) will be added in the future.
