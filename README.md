@@ -42,6 +42,14 @@ Or even better:
 
 (This works only if the flag `--write_metadata` has not been set)
 
+Discussion in the Rust user forum:
+
+- [current version (v0.3)](https://users.rust-lang.org/t/mandel-rust-v0-3-more-crates-more-options/4468):
+
+- [old version (v0.2)](https://users.rust-lang.org/t/new-version-of-mandel-rust-uses-rayon-added-benchmark/4403):
+
+
+
 # Used crates:
 - [Clap](https://github.com/kbknapp/clap-rs): command line parsing
 - [Time](https://github.com/rust-lang-deprecated/time): timing each run
@@ -51,7 +59,7 @@ Or even better:
 - [Simple parallel](https://github.com/huonw/simple_parallel): use scope and thread pool
 - [Rayon](https://github.com/nikomatsakis/rayon): using recursive divide-and-conquer call with join, use par_iter_mut
 - [Rust scoped pool](https://github.com/reem/rust-scoped-pool): use scope and thread pool
-- [Jobsteal](https://github.com/rphmeier/jobsteal): use scope and thread pool, use join [divide-and-conquer]
+- [Jobsteal](https://github.com/rphmeier/jobsteal): use scope and thread pool, use join (divide-and-conquer)
 - [Kirk](https://github.com/kinghajj/kirk) + [crossbeam](https://github.com/aturon/crossbeam): use scope and thread pool
 
 # Benchmark:
@@ -112,7 +120,7 @@ If in doubt just do run some benchmarks with different crates for your specific 
 - [ ] Check docopt (instead of clap ? Thanks to matklad)
 
 - [ ] Automate benchmark: re-run each test multiple times (user specified command line argument) and take the average
-- [ ] Automate benchmark: write all results to text files and make a nice plot
+- [ ] Automate benchmark: write all results to text files (JSON ?) and make a nice plot
 
 - [ ] Use a bigger image size and a higher number of iterations for the next release
 
