@@ -283,6 +283,9 @@ fn job_steal(mandel_config: &MandelConfig, image: &mut [u32]) {
 
 // The parallel version of the mandelbrot set calculation, uses jobsteal with divide-and-conquer strategy.
 fn job_steal_join(mandel_config: &MandelConfig, image: &mut [u32]) {
+    // Jobsteal uses n + 1 threads (1 main thread + n sub-threads)
+    // It is OK to create a Jobsteal pool with zero threads.
+    // See https://github.com/willi-kappler/mandel-rust/issues/1
     let mut pool = jobsteal::make_pool((mandel_config.num_threads - 1) as usize).unwrap();
 
     pool.scope(|scope| {
@@ -381,11 +384,9 @@ fn main() {
 
     do_run("rust_scoped_pool", &rust_scoped_pool, &mandel_config, &mut image, &time_now);
 
-    // Jobsteal uses n + 1 threads (1 main thread + n sub-threads)
-    if mandel_config.num_threads > 1 {
-        do_run("job_steal", &job_steal, &mandel_config, &mut image, &time_now);
-        do_run("job_steal_join", &job_steal_join, &mandel_config, &mut image, &time_now);
-    }
+    do_run("job_steal", &job_steal, &mandel_config, &mut image, &time_now);
+
+    do_run("job_steal_join", &job_steal_join, &mandel_config, &mut image, &time_now);
 
     do_run("kirk_crossbeam", &kirk_crossbeam, &mandel_config, &mut image, &time_now);
 }
