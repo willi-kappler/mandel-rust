@@ -333,6 +333,13 @@ fn kirk_crossbeam(mandel_config: &MandelConfig, image: &mut [u32]) {
 // Prepares and runs one version of the mandelbrot set calculation.
 fn do_run(file_name_prefix: &str, mandel_func: &Fn(&MandelConfig, &mut [u32]) -> (),
     mandel_config: &MandelConfig, image: &mut [u32], time_now: &str) {
+
+    for i in 0..mandel_config.img_size {
+        for j in 0..mandel_config.img_size {
+            image[((i * mandel_config.img_size) + j) as usize] = 0;
+        }
+    }
+
     let start_time = precise_time_ns();
 
     mandel_func(mandel_config, image);
@@ -381,11 +388,8 @@ fn main() {
 
     do_run("rust_scoped_pool", &rust_scoped_pool, &mandel_config, &mut image, &time_now);
 
-    // Jobsteal uses n + 1 threads (1 main thread + n sub-threads)
-    if mandel_config.num_threads > 1 {
-        do_run("job_steal", &job_steal, &mandel_config, &mut image, &time_now);
-        do_run("job_steal_join", &job_steal_join, &mandel_config, &mut image, &time_now);
-    }
+    do_run("job_steal", &job_steal, &mandel_config, &mut image, &time_now);
+    do_run("job_steal_join", &job_steal_join, &mandel_config, &mut image, &time_now);
 
     do_run("kirk_crossbeam", &kirk_crossbeam, &mandel_config, &mut image, &time_now);
 }
