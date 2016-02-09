@@ -116,6 +116,7 @@ If in doubt just do run some benchmarks with different crates for your specific 
 - [ ] Check [forkjoin](https://github.com/faern/forkjoin)
 - [ ] Check [rust-stm](https://github.com/Marthog/rust-stm)
 - [x] Check [kirk](https://github.com/kinghajj/kirk)
+- [ ] Check [SIMD](https://github.com/huonw/simd)
 - [ ] Use rust-fmt on source code (Thanks to matklad)
 - [ ] Check docopt (instead of clap ? Thanks to matklad)
 
