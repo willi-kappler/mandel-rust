@@ -1,7 +1,7 @@
 # Change Log
 
 ## 0.4 - 2016-02-28
-Refactor utility functions to mandel_util.rs
+Refactor utility functions to crate mandel_util and crate mandel_method
 New command line option: `--num_of_runs`
 Write benchmark results to file
 Adapt plot script to read in result file

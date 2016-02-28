@@ -1,0 +1,16 @@
+[package]
+name = "mandel_method"
+version = "0.4.0"
+authors = ["Willi Kappler, grandor@gmx.de"]
+
+[dependencies]
+num = "0.1"
+scoped_threadpool = "0.1"
+simple_parallel = "0.3"
+rayon = "0.3"
+crossbeam = {git = "https://github.com/aturon/crossbeam.git"}
+scoped-pool = "0.1"
+jobsteal = "0.4"
+kirk = {git = "https://github.com/kinghajj/kirk.git"}
+# clippy = "*"
+mandel_util = {path = "../mandel_util"}
