@@ -3,7 +3,7 @@
 This code shows how to calculate the set in serial and parallel using Rust and various libraries.
 More parallel versions (with different libraries) will be added in the future.
 
-Written by Willi Kappler, License: MIT - Version 0.4 (2016.02.02)
+Written by Willi Kappler, License: MIT - Version 0.4 (2016.02.28)
 
 ![mandelbrot set](mandel.png)
 
@@ -18,14 +18,15 @@ Run with the default values:
 
 Supported command line options:
 
-        --img_size <IMAGE_SIZE>              size of image in pixel (square, default: 1024, must be a power of two)
+        --img_size <IMAGE_SIZE>              size of image in pixel (square, default: 2048, must be a power of two)
         --img1 <IMAGINARY1>                  lower part (default: -1.50)
         --img2 <IMAGINARY2>                  upper part (default: 1.50)
         --write_metadata                     write metadata like run time into the ppm file (default: off)
         --no_ppm                             disable creation of the ppm file, just run the calculation (default: off)
         --bench                              use all available CPUs (default: off), will change in the future
-        --max_iter <MAX_ITER>                maximum number of iterations (default: 2048)
+        --max_iter <MAX_ITER>                maximum number of iterations (default: 4096)
         --num_threads <NUMBER_OF_THREADS>    number of threads to use (default: 2)
+        --num_of_runs=[NUM_OF_RUNS]          number of repetitive runs (default: 1)
         --re1 <REAL1>                        left real part (default: -2.0)
         --re2 <REAL2>                        right real part (default: 1.0)
 
@@ -85,15 +86,15 @@ scoped threadpool v0.1 | 24 | 169.02211
 simple parallel v0.3 | 1 | 2508.58119
 simple parallel v0.3 | 8 | 389.50966
 simple parallel v0.3 | 24 | 161.75248
-rayon* v0.2 | 24 | 127.69423
-rayon par_iter_mut* v0.2 | 24 | 106.66261
+rayon* v0.3 | 24 | 127.69423
+rayon par_iter_mut* v0.3 | 24 | 106.66261
 rust scoped pool v0.1 | 1 | 2178.49247
 rust scoped pool v0.1 | 8 | 318.91450
 rust scoped pool v0.1 | 24 | 141.91438
-jobsteal v0.2 | 8 | 350.47366
-jobsteal v0.2 | 24 | 128.17375
-jobsteal join v0.2 | 8 | 245.47314
-jobsteal join v0.2 | 24 | 98.78363
+jobsteal v0.4 | 8 | 350.47366
+jobsteal v0.4 | 24 | 128.17375
+jobsteal join v0.4 | 8 | 245.47314
+jobsteal join v0.4 | 24 | 98.78363
 kirk git + crossbeam git | 1 | 2432.77082
 kirk git + crossbeam git | 8 | 340.31774
 kirk git + crossbeam git | 24 | 115.44917
@@ -110,18 +111,12 @@ If in doubt just do run some benchmarks with different crates for your specific 
 - [ ] Check [ArrayFire](https://github.com/arrayfire/arrayfire-rust)
 - [ ] Check [Collenchyma](https://github.com/autumnai/collenchyma)
 - [ ] Check [Timely Dataflow](https://github.com/frankmcsherry/timely-dataflow)
-- [x] Check [Crossbeam](https://github.com/aturon/crossbeam)
-- [x] Check [rust-scoped-pool](https://github.com/reem/rust-scoped-pool)
-- [x] Check [jobsteal](https://github.com/rphmeier/jobsteal)
 - [ ] Check [forkjoin](https://github.com/faern/forkjoin)
 - [ ] Check [rust-stm](https://github.com/Marthog/rust-stm)
-- [x] Check [kirk](https://github.com/kinghajj/kirk)
-- [ ] Use rust-fmt on source code (Thanks to matklad)
-- [ ] Check docopt (instead of clap ? Thanks to matklad)
 
 - [ ] Automate benchmark: re-run each test multiple times (user specified command line argument) and take the average
 - [ ] Automate benchmark: write all results to text files (JSON ?) and make a nice plot
 
-- [ ] Use a bigger image size and a higher number of iterations for the next release
+- [x] Use a bigger image size and a higher number of iterations for the next release
 
 Any feedback is welcome!

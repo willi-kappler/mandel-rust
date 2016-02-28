@@ -1,18 +1,23 @@
 [package]
 name = "mandel"
-version = "0.3.0"
-authors = ["Willi Kappler"]
+version = "0.4.0"
+authors = ["Willi Kappler, grandor@gmx.de"]
+
+[lib]
+name = "mandel_util"
+path = "src/mandel_util.rs"
 
 [dependencies]
 time = "0.1"
 num = "0.1"
 clap = "1"
 num_cpus = "0.2"
+rustc_version = "0.1"
 scoped_threadpool = "0.1"
 simple_parallel = "0.3"
-# rayon = {git = "https://github.com/nikomatsakis/rayon.git"}
-rayon = "0.2"
+rayon = "0.3"
 crossbeam = {git = "https://github.com/aturon/crossbeam.git"}
 scoped-pool = "0.1"
-jobsteal = "0.2"
+jobsteal = "0.4"
 kirk = {git = "https://github.com/kinghajj/kirk.git"}
+# clippy = "*"
