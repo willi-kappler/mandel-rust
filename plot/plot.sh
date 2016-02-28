@@ -10,6 +10,7 @@ gnuplot <<PLOT
     set title "mandelbrot benchmark"
     set xtics 0,2,24
     set xrange [0:25]
+    set yrange [0:*]
 
     filenames = "job_steal_join job_steal kirk_crossbeam rayon_join rayon_par_iter rust_scoped_pool scoped_thread_pool serial simple_parallel"
     plot for [file in filenames] file.".txt" title file with errorbars
