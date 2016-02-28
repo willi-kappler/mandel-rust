@@ -35,6 +35,8 @@ pub struct MandelConfig {
     pub num_of_runs: u32
 }
 
+include!(concat!(env!("OUT_DIR"), "/compiler_version.rs"));
+
 // Parse command line options via clap and returns the responding configuration
 pub fn parse_arguments() -> MandelConfig {
     let matches = App::new("mandel_rust")

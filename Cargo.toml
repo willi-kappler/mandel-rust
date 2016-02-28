@@ -2,17 +2,20 @@
 name = "mandel"
 version = "0.4.0"
 authors = ["Willi Kappler, grandor@gmx.de"]
+build = "build.rs"
 
 [lib]
 name = "mandel_util"
 path = "src/mandel_util.rs"
+
+[build-dependencies]
+rustc_version = "0.1"
 
 [dependencies]
 time = "0.1"
 num = "0.1"
 clap = "1"
 num_cpus = "0.2"
-rustc_version = "0.1"
 scoped_threadpool = "0.1"
 simple_parallel = "0.3"
 rayon = "0.3"

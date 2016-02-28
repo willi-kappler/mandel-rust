@@ -227,6 +227,7 @@ fn main() {
 
     println!("mandel-rust version: {}", version);
     println!("Number of repetitive runs: {}", mandel_config.num_of_runs);
+    println!("Rustc version: {}", compiler_version);
 
     // Get current date and time once and pass it to the individual runs for the image filename.
     let tm = now();
