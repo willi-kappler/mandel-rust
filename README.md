@@ -114,8 +114,8 @@ If in doubt just do run some benchmarks with different crates for your specific 
 - [ ] Check [forkjoin](https://github.com/faern/forkjoin)
 - [ ] Check [rust-stm](https://github.com/Marthog/rust-stm)
 
-- [ ] Automate benchmark: re-run each test multiple times (user specified command line argument) and take the average
-- [ ] Automate benchmark: write all results to text files (JSON ?) and make a nice plot
+- [x] Automate benchmark: re-run each test multiple times (user specified command line argument) and take the average
+- [x] Automate benchmark: write all results to text files and make a nice plot
 
 - [x] Use a bigger image size and a higher number of iterations for the next release
 
