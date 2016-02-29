@@ -75,8 +75,6 @@ Measured on a Transtec server with the following specs:
 ![mandelbrot benchmark plot](plot/mandel_bench.png)
 
 
-(Note: that not all number of cores have been run in the benchmark)
-
 Method | Number of threads | Time taken (in ms)
 -------|-------------------|------------------------
 serial | 1 | 1703.82371
@@ -86,8 +84,8 @@ scoped threadpool v0.1 | 24 | 169.02211
 simple parallel v0.3 | 1 | 2508.58119
 simple parallel v0.3 | 8 | 389.50966
 simple parallel v0.3 | 24 | 161.75248
-rayon* v0.3 | 24 | 127.69423
-rayon par_iter_mut* v0.3 | 24 | 106.66261
+rayon v0.3 | 24 | 127.69423
+rayon par_iter_mut v0.3 | 24 | 106.66261
 rust scoped pool v0.1 | 1 | 2178.49247
 rust scoped pool v0.1 | 8 | 318.91450
 rust scoped pool v0.1 | 24 | 141.91438
@@ -99,10 +97,13 @@ kirk git + crossbeam git | 1 | 2432.77082
 kirk git + crossbeam git | 8 | 340.31774
 kirk git + crossbeam git | 24 | 115.44917
 
-(*) Note that rayon uses whatever number of cores are available at the moment.
+I've increased the time to calculate the mandelbot set by making the image size bigger and using a higher iteration.
+Thus the differences between the methods become less significant.
+Using only one thread the overhead is clearly noticeable. Here is a closeup for the case where the number of threads are greater than 10:
 
-With just using one thread the overhead for scoped thread pool, rust scoped pool simple parallel and kirk is too high and thus they are slower than the serial version.
-Using all cores (including virtual one due to hyper threading) jobsteal join is the fastest method. It uses explicit work stealing (like Rayon) to utilize all the cores more efficiently.
+
+![mandelbrot benchmark plot closeup](plot/mandel_bench_closeup.png)
+
 
 As always take these results with a grain of salt, they just show a general direction.
 If in doubt just do run some benchmarks with different crates for your specific code (which is always a good thing to do).
