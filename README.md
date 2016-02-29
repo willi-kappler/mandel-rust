@@ -74,32 +74,12 @@ Measured on a Transtec server with the following specs:
 
 ![mandelbrot benchmark plot](plot/mandel_bench.png)
 
-
-Method | Number of threads | Time taken (in ms)
--------|-------------------|------------------------
-serial | 1 | 1703.82371
-scoped threadpool v0.1 | 1 | 2283.06639
-scoped threadpool v0.1 | 8 | 393.57072
-scoped threadpool v0.1 | 24 | 169.02211
-simple parallel v0.3 | 1 | 2508.58119
-simple parallel v0.3 | 8 | 389.50966
-simple parallel v0.3 | 24 | 161.75248
-rayon v0.3 | 24 | 127.69423
-rayon par_iter_mut v0.3 | 24 | 106.66261
-rust scoped pool v0.1 | 1 | 2178.49247
-rust scoped pool v0.1 | 8 | 318.91450
-rust scoped pool v0.1 | 24 | 141.91438
-jobsteal v0.4 | 8 | 350.47366
-jobsteal v0.4 | 24 | 128.17375
-jobsteal join v0.4 | 8 | 245.47314
-jobsteal join v0.4 | 24 | 98.78363
-kirk git + crossbeam git | 1 | 2432.77082
-kirk git + crossbeam git | 8 | 340.31774
-kirk git + crossbeam git | 24 | 115.44917
+(The actual numbers are in the text files under the folder plot/)
 
 I've increased the time to calculate the mandelbot set by making the image size bigger and using a higher iteration.
 Thus the differences between the methods become less significant.
-Using only one thread the overhead is clearly noticeable. Here is a closeup for the case where the number of threads are greater than 10:
+Using only one thread the overhead is also less noticeable. simple_parallel has a high variance for thread numbers between 2 and 6.
+Here is a closeup for the case where the number of threads are greater than 10:
 
 
 ![mandelbrot benchmark plot closeup](plot/mandel_bench_closeup.png)
