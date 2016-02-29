@@ -60,7 +60,7 @@ Discussion in the Rust user forum:
 - [Simple parallel](https://github.com/huonw/simple_parallel): use scope and thread pool
 - [Rayon](https://github.com/nikomatsakis/rayon): using recursive divide-and-conquer call with join, use par_iter_mut
 - [Rust scoped pool](https://github.com/reem/rust-scoped-pool): use scope and thread pool
-- [Jobsteal](https://github.com/rphmeier/jobsteal): use scope and thread pool, use join (divide-and-conquer)
+- [Jobsteal](https://github.com/rphmeier/jobsteal): use scope and thread pool, use join (divide-and-conquer). Thanks to Robert Habermeier for the code!
 - [Kirk](https://github.com/kinghajj/kirk) + [crossbeam](https://github.com/aturon/crossbeam): use scope and thread pool
 
 # Benchmark:
@@ -113,6 +113,7 @@ If in doubt just do run some benchmarks with different crates for your specific 
 - [ ] Check [Timely Dataflow](https://github.com/frankmcsherry/timely-dataflow)
 - [ ] Check [forkjoin](https://github.com/faern/forkjoin)
 - [ ] Check [rust-stm](https://github.com/Marthog/rust-stm)
+- [ ] Check [mpi](https://github.com/bsteinb/rsmpi)
 
 - [x] Automate benchmark: re-run each test multiple times (user specified command line argument) and take the average
 - [x] Automate benchmark: write all results to text files and make a nice plot
