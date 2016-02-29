@@ -24,7 +24,7 @@ extern crate mandel_method;
 use time::{now};
 
 // Internal modules
-use mandel_util::*;
+use mandel_util::{parse_arguments, do_run, compiler_version};
 use mandel_method::*;
 
 fn main() {
