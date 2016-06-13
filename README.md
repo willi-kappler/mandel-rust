@@ -53,7 +53,7 @@ Discussion in the Rust user forum:
 
 # Used crates:
 - [Clap](https://github.com/kbknapp/clap-rs): command line parsing
-- [Time](https://github.com/rust-lang-deprecated/time): timing each run
+- [Time](https://doc.rust-lang.org/time/time/index.html): timing each run
 - [Num](https://github.com/rust-num/num): complex numbers
 - [Num_cpus](https://github.com/seanmonstar/num_cpus): for the `--bench` flag, determine the total number of cpus
 - [Scoped threadpool](https://github.com/Kimundi/scoped-threadpool-rs): use scope and thread pool

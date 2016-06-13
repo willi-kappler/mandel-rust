@@ -8,14 +8,14 @@ gnuplot <<PLOT
     set ylabel "time [ms]"
     set style data points
     set title "mandelbrot benchmark"
-    set xtics 0,2,24
+    set xtics 10,1,24
     set mxtics 2
-    set xrange [0:25]
+    set xrange [10:25]
 
-    set yrange [0:*]
-    set ytics 0,1000
+    set yrange [500:*]
+    set ytics 0,100
     set mytics 2
 
     filenames = "job_steal_join job_steal kirk_crossbeam rayon_join rayon_par_iter rust_scoped_pool scoped_thread_pool serial simple_parallel"
-    plot for [file in filenames] file.".txt" title file with errorbars
+    plot for [file in filenames] file.".txt" using 1:(\$1>10?\$2:1/0):3:4 title file with errorbars
 PLOT
