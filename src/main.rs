@@ -57,8 +57,6 @@ fn main() {
 
     do_run("scoped_thread_pool", &scoped_thread_pool_, &mandel_config, &mut image, &time_now);
 
-    do_run("simple_parallel", &simple_parallel_, &mandel_config, &mut image, &time_now);
-
     // Make sure this is only called once
     match rayon::initialize(rayon::Configuration::new().set_num_threads(mandel_config.num_threads as usize)) {
         Ok(_) => {
@@ -75,5 +73,5 @@ fn main() {
 
     do_run("job_steal_join", &job_steal_join, &mandel_config, &mut image, &time_now);
 
-    do_run("kirk_crossbeam", &kirk_crossbeam, &mandel_config, &mut image, &time_now);
+    // do_run("kirk_crossbeam", &kirk_crossbeam, &mandel_config, &mut image, &time_now);
 }

@@ -1,7 +1,6 @@
 // External crates
 extern crate num;
 extern crate scoped_threadpool;
-extern crate simple_parallel;
 extern crate rayon;
 extern crate scoped_pool;
 extern crate jobsteal;
@@ -47,21 +46,6 @@ pub fn scoped_thread_pool_(mandel_config: &MandelConfig, image: &mut [u32]) {
                     );
                 }
             });
-        }
-    });
-}
-
-// The parallel version of the mandelbrot set calculation, uses simple_parallel.
-pub fn simple_parallel_(mandel_config: &MandelConfig, image: &mut [u32]) {
-    let mut pool = simple_parallel::Pool::new(mandel_config.num_threads as usize);
-
-    pool.for_(image.chunks_mut(mandel_config.img_size as usize).enumerate(), |(y, slice)| {
-        for x in 0..mandel_config.img_size {
-            slice[x as usize] =
-            mandel_iter(mandel_config.max_iter,
-                Complex64{re: mandel_config.re1 + ((x as f64) * mandel_config.x_step),
-                          im: mandel_config.img1 + ((y as f64) * mandel_config.y_step)}
-            );
         }
     });
 }
@@ -177,6 +161,7 @@ fn job_steal_helper<'a, 'b>(mandel_config: &MandelConfig, spawner: &jobsteal::Sp
 }
 
 // The parallel version of the mandelbrot set calculation, uses kirk and crossbeam.
+/*
 pub fn kirk_crossbeam(mandel_config: &MandelConfig, image: &mut [u32]) {
     crossbeam::scope(|scope| {
         let mut pool = kirk::Pool::<kirk::Deque<kirk::Task>>::scoped(scope,
@@ -194,3 +179,4 @@ pub fn kirk_crossbeam(mandel_config: &MandelConfig, image: &mut [u32]) {
         }
     });
 }
+*/

@@ -5,7 +5,10 @@ authors = ["Willi Kappler, grandor@gmx.de"]
 
 [dependencies]
 time = "0.1"
-rayon = "0.3"
+rayon = "0.4"
 # clippy = "*"
 mandel_util = {path = "mandel_util"}
 mandel_method = {path = "mandel_method"}
+
+[profile.release]
+lto = true

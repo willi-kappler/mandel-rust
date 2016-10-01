@@ -11,4 +11,7 @@ rustc_version = "0.1"
 time = "0.1"
 num = "0.1"
 clap = "1"
-num_cpus = "0.2"
+num_cpus = "1.0"
+
+[profile.release]
+lto = true
