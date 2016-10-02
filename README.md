@@ -49,7 +49,7 @@ A friend also wrote a mandelbrot set application but in C++. He has a very nice 
 
 Discussion of mandel-rust in the Rust user forum:
 
-- [current version (v0.4)](https://users.rust-lang.org)
+- [current version (v0.4)](https://users.rust-lang.org/t/mandel-rust-v0-4/7481)
 
 - [old version v0.2](https://users.rust-lang.org/t/new-version-of-mandel-rust-uses-rayon-added-benchmark/4403) and [v0.3](https://users.rust-lang.org/t/mandel-rust-v0-3-more-crates-more-options/4468)
 
