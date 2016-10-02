@@ -1,3 +1,4 @@
+#![allow(non_upper_case_globals)]
 
 // External crates
 #[macro_use]
@@ -153,7 +154,7 @@ fn write_benchmark_result(method: &str, num_threads: u32,
             .write(true)
             .append(true)
             .create(true)
-            .open(format!("plot/{}.txt", method))));
+            .open(format!("plot{}{}.txt", std::path::MAIN_SEPARATOR, method))));
 
     try!(write!(buffer, "{} {} {} {}\n", num_threads, time_in_ms, min_time, max_time));
 

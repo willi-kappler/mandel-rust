@@ -11,7 +11,6 @@
 //
 //#![plugin(clippy)]
 
-
 // External crates
 extern crate time;
 extern crate rayon;
