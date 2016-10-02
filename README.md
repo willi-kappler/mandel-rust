@@ -91,6 +91,10 @@ Conclusion: The more threads you use, the closer the results get. On my environm
 As always take these results with a grain of salt, they just show a general direction.
 If in doubt just do run some benchmarks with different crates for your specific code (which is always a good thing to do).
 
+
+A friend also wrote a mendelbrot set application but in C++. He has a very nice and detailed discussion about various aspects of his software. You can read more about it here: [geomandel](https://github.com/crapp/geomandel)
+
+
 # TODO:
 - [ ] Check [ArrayFire](https://github.com/arrayfire/arrayfire-rust)
 - [ ] Check [Collenchyma](https://github.com/autumnai/collenchyma)
