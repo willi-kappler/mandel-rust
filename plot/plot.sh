@@ -16,6 +16,6 @@ gnuplot <<PLOT
     set ytics 0,100
     set mytics 2
 
-    filenames = "job_steal_join job_steal kirk_crossbeam rayon_join rayon_par_iter rust_scoped_pool scoped_thread_pool serial simple_parallel"
+    filenames = "job_steal_join job_steal rayon_join rayon_par_iter rust_scoped_pool scoped_thread_pool serial"
     plot for [file in filenames] file.".txt" using 1:(\$1>10?\$2:1/0):3:4 title file with errorbars
 PLOT
