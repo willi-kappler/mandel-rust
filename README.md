@@ -30,7 +30,7 @@ Supported command line options:
         --re1 <REAL1>                        left real part (default: -2.0)
         --re2 <REAL2>                        right real part (default: 1.0)
 
-The main program runs the calculation 9 times: 1 x single threaded and currently 8 x multi threaded.
+The main program runs the calculation 7 times: 1 x single threaded and currently 6 x multi threaded.
 It writes the mandelbrot set out as PPM image files. For each method one image file is created.
 
 To check if all the images are equal (and thus that all the computations are correct) you can use this command:
