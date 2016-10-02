@@ -85,6 +85,8 @@ You can use the following lines to reproduce the result:
 The actual numbers are in the text files under the folder plot/. In order to generate the plot use the gnuplot script in the plot/ folder.
 
 
+Conclusion: The more threads you use, the closer the results get. On my environment (hardware, OS, Rust version, etc.) Rayon and Jobsteal were the fastest, with Jobsteal beeing a bit faster in more cases.
+
 
 As always take these results with a grain of salt, they just show a general direction.
 If in doubt just do run some benchmarks with different crates for your specific code (which is always a good thing to do).
