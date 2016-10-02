@@ -53,7 +53,7 @@ pub fn parse_arguments() -> MandelConfig {
              --bench 'use all available CPUs (default: off), will change in the future'
              --max_iter=[MAX_ITER] 'maximum number of iterations (default: 4096)'
              --img_size=[IMAGE_SIZE] 'size of image in pixel (square, default: 2048, must be a power of two)'
-             --num_of_runs=[NUM_OF_RUNS] 'number of repetitive runs (default: 1)'
+             --num_of_runs=[NUM_OF_RUNS] 'number of repetitive runs (default: 2)'
              --num_threads=[NUMBER_OF_THREADS] 'number of threads to use (default: 2)'")
         .get_matches();
 
@@ -66,7 +66,7 @@ pub fn parse_arguments() -> MandelConfig {
     let no_ppm = matches.is_present("no_ppm");
     let max_iter = value_t!(matches.value_of("MAX_ITER"), u32).unwrap_or(4096);
     let img_size = value_t!(matches.value_of("IMAGE_SIZE"), u32).unwrap_or(2048);
-    let num_of_runs = value_t!(matches.value_of("NUM_OF_RUNS"), u32).unwrap_or(1);
+    let num_of_runs = value_t!(matches.value_of("NUM_OF_RUNS"), u32).unwrap_or(2);
     let num_threads = if bench { num_cpus::get() as u32 } else {
         value_t!(matches.value_of("NUMBER_OF_THREADS"), u32).unwrap_or(2) };
 
@@ -178,7 +178,9 @@ pub fn do_run(method: &str, mandel_func: &Fn(&MandelConfig, &mut [u32]) -> (),
 
         if total_time_in_ms > max_time {
             max_time = total_time_in_ms;
-        } else if total_time_in_ms < min_time {
+        }
+
+        if total_time_in_ms < min_time {
             min_time = total_time_in_ms;
         }
 

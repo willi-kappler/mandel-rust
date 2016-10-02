@@ -3,7 +3,7 @@
 This code shows how to calculate the set in serial and parallel using Rust and various libraries.
 More parallel versions (with different libraries) will be added in the future.
 
-Written by Willi Kappler, License: MIT - Version 0.4 (2016.02.28)
+Written by Willi Kappler, License: MIT - Version 0.4 (2016.10.01)
 
 ![mandelbrot set](mandel.png)
 
@@ -26,7 +26,7 @@ Supported command line options:
         --bench                              use all available CPUs (default: off), will change in the future
         --max_iter <MAX_ITER>                maximum number of iterations (default: 4096)
         --num_threads <NUMBER_OF_THREADS>    number of threads to use (default: 2)
-        --num_of_runs=[NUM_OF_RUNS]          number of repetitive runs (default: 1)
+        --num_of_runs=[NUM_OF_RUNS]          number of repetitive runs (default: 2)
         --re1 <REAL1>                        left real part (default: -2.0)
         --re2 <REAL2>                        right real part (default: 1.0)
 
@@ -45,9 +45,9 @@ Or even better:
 
 Discussion in the Rust user forum:
 
-- [current version (v0.3)](https://users.rust-lang.org/t/mandel-rust-v0-3-more-crates-more-options/4468)
+- [current version (v0.4)]()
 
-- [old version (v0.2)](https://users.rust-lang.org/t/new-version-of-mandel-rust-uses-rayon-added-benchmark/4403)
+- [old version v0.2](https://users.rust-lang.org/t/new-version-of-mandel-rust-uses-rayon-added-benchmark/4403) and [v0.3](https://users.rust-lang.org/t/mandel-rust-v0-3-more-crates-more-options/4468)
 
 
 
@@ -61,28 +61,27 @@ Discussion in the Rust user forum:
 - [Rayon](https://github.com/nikomatsakis/rayon): using recursive divide-and-conquer call with join, use par_iter_mut
 - [Rust scoped pool](https://github.com/reem/rust-scoped-pool): use scope and thread pool
 - [Jobsteal](https://github.com/rphmeier/jobsteal): use scope and thread pool, use join (divide-and-conquer). Thanks to Robert Habermeier for the code!
-- [Kirk](https://github.com/kinghajj/kirk) + [crossbeam](https://github.com/aturon/crossbeam): use scope and thread pool
+
 
 # Benchmark:
 Measured on a Transtec server with the following specs:
 - RAM: 32 GB
 - CPU: 2 x Intel Xeon(R) CPU E5-2620 v3 @ 2.40GHz (12 Cores, with hyper threading 24 cores)
 - Operating system: 64 bit Ubuntu Server 14.04
-- Rust version: rustc 1.6.0 (c30b771ad 2016-01-19)
-- Mandel configuration: re1: -2.00, re2: 1.00, img1: -1.50, img2: 1.50, max_iter: 2048, img_size: 1024
+- Rust version: rustc 1.12.0 (3191fbae9 2016-09-23)
+- Mandel configuration: re1: -2.00, re2: 1.00, img1: -1.50, img2: 1.50, max_iter: 4096, img_size: 2048
+- Number of repetetive runs: 10
 
+You can use the following lines to reproduce the result:
+
+	for i in $(seq 1 10); do cargo run --release -- --no_ppm --num_of_runs 10 --num_threads $i; done
+
+	for i in $(seq 12 2 24); do cargo run --release -- --no_ppm --num_of_runs 10 --num_threads $i; done
 
 ![mandelbrot benchmark plot](plot/mandel_bench.png)
 
-(The actual numbers are in the text files under the folder plot/)
+The actual numbers are in the text files under the folder plot/. In order to generate the plot use the gnuplot script in the plot/ folder.
 
-I've increased the time to calculate the mandelbot set by making the image size bigger and using a higher iteration.
-Thus the differences between the methods become less significant.
-Using only one thread the overhead is also less noticeable. simple_parallel has a high variance for thread numbers between 2 and 6.
-Here is a closeup for the case where the number of threads are greater than 10:
-
-
-![mandelbrot benchmark plot closeup](plot/mandel_bench_closeup.png)
 
 
 As always take these results with a grain of salt, they just show a general direction.

@@ -4,7 +4,7 @@ extern crate scoped_threadpool;
 extern crate rayon;
 extern crate scoped_pool;
 extern crate jobsteal;
-extern crate kirk;
+//extern crate kirk;
 extern crate crossbeam;
 
 // Internal crates
@@ -13,7 +13,7 @@ extern crate mandel_util;
 // External modules
 use num::complex::Complex64;
 use rayon::par_iter::*;
-use kirk::crew::deque::Options;
+//use kirk::crew::deque::Options;
 
 // Internal modules
 use mandel_util::{mandel_iter, MandelConfig};
