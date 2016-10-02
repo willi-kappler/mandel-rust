@@ -11,7 +11,7 @@ rayon = "0.4"
 crossbeam = "0.2"
 scoped-pool = "1.0"
 jobsteal = "0.5"
-kirk = {git = "https://github.com/kinghajj/kirk.git"}
+# kirk = {git = "https://github.com/kinghajj/kirk.git"}
 # clippy = "*"
 mandel_util = {path = "../mandel_util"}
 
