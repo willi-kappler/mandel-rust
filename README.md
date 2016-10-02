@@ -47,7 +47,7 @@ Or even better:
 A friend also wrote a mandelbrot set application but in C++. He has a very nice and detailed discussion about various aspects of his software. You can read more about it here: [geomandel](https://github.com/crapp/geomandel)
 
 
-Discussion in the Rust user forum:
+Discussion of mandel-rust in the Rust user forum:
 
 - [current version (v0.4)](https://users.rust-lang.org)
 
