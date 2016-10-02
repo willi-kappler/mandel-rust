@@ -43,6 +43,10 @@ Or even better:
 
 (This works only if the flag `--write_metadata` has not been set)
 
+
+A friend also wrote a mandelbrot set application but in C++. He has a very nice and detailed discussion about various aspects of his software. You can read more about it here: [geomandel](https://github.com/crapp/geomandel)
+
+
 Discussion in the Rust user forum:
 
 - [current version (v0.4)](https://users.rust-lang.org)
@@ -90,9 +94,6 @@ Conclusion: The more threads you use, the closer the results get. On my environm
 
 As always take these results with a grain of salt, they just show a general direction.
 If in doubt just do run some benchmarks with different crates for your specific code (which is always a good thing to do).
-
-
-A friend also wrote a mendelbrot set application but in C++. He has a very nice and detailed discussion about various aspects of his software. You can read more about it here: [geomandel](https://github.com/crapp/geomandel)
 
 
 # TODO:
