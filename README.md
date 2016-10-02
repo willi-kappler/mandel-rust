@@ -45,7 +45,7 @@ Or even better:
 
 Discussion in the Rust user forum:
 
-- [current version (v0.4)]()
+- [current version (v0.4)](https://users.rust-lang.org)
 
 - [old version v0.2](https://users.rust-lang.org/t/new-version-of-mandel-rust-uses-rayon-added-benchmark/4403) and [v0.3](https://users.rust-lang.org/t/mandel-rust-v0-3-more-crates-more-options/4468)
 
@@ -78,7 +78,9 @@ You can use the following lines to reproduce the result:
 
 	for i in $(seq 12 2 24); do cargo run --release -- --no_ppm --num_of_runs 10 --num_threads $i; done
 
-![mandelbrot benchmark plot](plot/mandel_bench.png)
+![mandelbrot benchmark plot 1](plot/mandel_bench1.png)
+
+![mandelbrot benchmark plot 2](plot/mandel_bench2.png)
 
 The actual numbers are in the text files under the folder plot/. In order to generate the plot use the gnuplot script in the plot/ folder.
 
