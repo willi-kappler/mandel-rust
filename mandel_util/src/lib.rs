@@ -18,6 +18,8 @@ use std::io::prelude::Write;
 use std::io::Result;
 use std::io::BufWriter;
 use std::fs::OpenOptions;
+use std::path::Path;
+use std::fs;
 
 // Configuration file, reflects command line options
 #[derive(Copy, Clone)]
@@ -148,7 +150,17 @@ fn write_image(file_name: &str, mandel_config: &MandelConfig, time_in_ms: f64, i
 }
 
 fn write_benchmark_result(method: &str, num_threads: u32,
-    time_in_ms: f64, min_time: f64, max_time: f64) -> Result<()> {
+     time_in_ms: f64, min_time: f64, max_time: f64) -> Result<()> {
+
+    // Check if output folder "plot" is available:
+
+    if !Path::new("plot").exists() {
+        // If not, create it!
+        println!("Folder 'plot' does not exist, creating it...");
+        try!(fs::create_dir("plot"));
+    
+    }
+
     let mut buffer = BufWriter::new(try!(
         OpenOptions::new()
             .write(true)
